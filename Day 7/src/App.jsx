@@ -1,4 +1,5 @@
 import './App.css'
+import { Event } from './components/Event.jsx'
 import {Wrapper} from './components/Wrapper'
 import { UserCard } from './components/UserCard'
 function App() {
@@ -15,10 +16,7 @@ function App() {
   ]
   return (
     <>
-      <h1> User Dashboard </h1>
-      <Wrapper title='User list'>
-        {user.map((data)=> (<UserCard data={data} />))}
-      </Wrapper>
+     <Event/>
     </>
   )
 }
