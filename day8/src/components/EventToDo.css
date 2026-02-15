@@ -7,12 +7,12 @@
     height: 500px;
     padding: 20px;
     border-radius: 20px;
-    background-color: rgb(154, 213, 155);
-    color : red;
+    background-color: rgb(189, 124, 176);
+    color : rgb(9, 6, 6);
 
 }
 .B1{
-    background-color: greenyellow;
+    background-color: rgb(196, 232, 107);
 }
 .B2{
      background-color: rgb(232, 21, 21);
