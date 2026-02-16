@@ -1,27 +1,33 @@
-.div0{
 
-    background-color: blanchedalmond;
-}
 .Div{
     width: 500px;
     height: 500px;
     padding: 20px;
     border-radius: 20px;
-    background-color: rgb(189, 124, 176);
-    color : rgb(9, 6, 6);
+    background-color: rgb(220, 140, 230);
+    
 
 }
 .B1{
-    background-color: rgb(196, 232, 107);
+    background-color: rgb(202, 237, 150);
 }
 .B2{
-     background-color: rgb(232, 21, 21);
+     background-color: rgb(236, 152, 152);
 }
 .count{
-    color:aqua;
+    color:rgb(128, 231, 231);
 }
 .div2{
     background-color: rgb(208, 149, 231);
     border-radius: 20px;
 
+}
+.pre1{
+    size: 10px;
+}
+.input1{
+    padding-left: 100;
+}
+.notesicon{
+    align-content: left;
 }
