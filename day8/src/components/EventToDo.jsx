@@ -31,19 +31,23 @@ export default function EventToDo() {
         }
     }
 
+
+
     return (
         <div className="Div">
-
-            <h1>Event Handling</h1>
+            <div className="notesicon">
+                <img src="./notes.png" alt="this is icon" width={70} height={70}/>
+            </div>
+            <h1>To-Do List</h1>
 
             {/* <button onClick={() => handleClick("Sahil")}>
                 Click Me
             </button> */}
 
             <form onSubmit={handleSubmit}>
-                <input type="text" name="task" placeholder="Add your task here" />
-                <br />
-                <button type="submit">Add Task</button>
+                <input type="text" name="task" placeholder="Add your task here" className="input1" />
+                <button type="submit" className="task">Add Task</button>
+                
             </form>
             <br />
             <ul id="taskList" onClick={handleClickList}></ul>
