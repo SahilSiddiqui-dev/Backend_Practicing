@@ -18,8 +18,8 @@ export default function Counter()
     }
     return(
         <div className =" div2">
-        <h1>Counter App</h1>
-        <h3 className='count'>{count}</h3>
+        <h1 className='count'>Counter App</h1>
+        <h3>{count}</h3>
         <button  className="B1" onClick={HandleIncrement}> + </button>
         <button className="B2" onClick={HandleDecrement}> - </button>
 
