@@ -13,7 +13,9 @@ export default function EventToDo() {
         const li = document.createElement("li");
         li.innerHTML = `
             <span>${inputValue}</span>
-            <button class="deleteBtn">Delete</button>
+            <button class="deleteBtn">
+                 🗑
+            </button>
         `;
 
         document.getElementById("taskList").appendChild(li);
@@ -51,7 +53,7 @@ export default function EventToDo() {
                 
             </form>
             <br />
-            <ul id="taskList" onClick={handleClickList}></ul>
+            <li id="taskList" className="taskList" onClick={handleClickList}></li>
 
         </div>
     );
