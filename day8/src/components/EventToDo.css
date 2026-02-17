@@ -65,3 +65,17 @@ button:active{
 .count{
     color: rgb(0, 0, 0);
 }
+.deleteBtn{
+    font-size: 17px;
+    cursor: pointer;
+}
+.taskList{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    background-color: rgb(175, 116, 205);
+    align-items: center;
+}
