@@ -5,6 +5,7 @@
     padding: 20px;
     border-radius: 20px;
     background-color: rgb(220, 140, 230);
+    box-shadow: 5px 5px 5px rgb(127, 20, 208);
     
 
 }
@@ -15,10 +16,11 @@
      background-color: rgb(236, 152, 152);
 }
 .count{
-    color:rgb(128, 231, 231);
+    text-shadow: 2px 2px 4px rgb(143, 30, 229);
+    color:rgb(128, 183, 231);
 }
 .div2{
-    background-color: rgb(208, 149, 231);
+    background-color: rgb(220, 140, 230);
     border-radius: 20px;
 
 }
@@ -26,8 +28,40 @@
     size: 10px;
 }
 .input1{
+    border-radius: 10px;
     padding-left: 100;
 }
 .notesicon{
-    align-content: left;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+.form{
+    display: flex;
+    margin-left: 100px;
+}
+.task{
+    background-color:rgb(152, 91, 182);
+    margin-left: 20px;
+}
+button:hover{
+    background-color:rgb(152, 91, 182);
+    transition: shadowbox 0.2s ease;
+    transition: transform 0.2s ease;
+    box-shadow: 5px 5px 5px rgb(143, 30, 229);
+
+}
+button:active{
+    transform: scale(0.95);
+}
+.heading{
+    text-shadow: 2px 2px 4px rgb(143, 30, 229);
+    color: rgb(0, 0, 0);
+    /* margin-left: 40px; */
+}
+.image1{
+    margin-left: 70px;
+}
+.count{
+    color: rgb(0, 0, 0);
 }
