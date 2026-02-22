@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+    <script src ="google.com"> </script>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <!-- this is the babel script that will allow us to write jsx in our html file -->
+    <script type="text/babel"> // this script converts whats written inside this into js that the browser can understand
+    const name = "SAHIL"; 
+    let SocksPrice = 10;
+    let t_Shirts = 8;
+    let ProductCost = SocksPrice + (2*t_Shirts);
+    console.log(ProductCost);
+    let ShippingCost = 5;
+    let date = dayjs().format('MMMM D');
+    console.log(date);
+    let Current_Time = dayjs().format('hh:mm:ss');
+    console.log(Current_Time);
+    const div = (
+        <div>
+            <h1>1a.</h1>
+            <button> Good Job!</button>
+            <hr/>
+            <h1>1.b</h1>
+            <p> This is my name : {name}</p>
+            <hr/>
+            <h1>1.c</h1>
+            <h2>Cotton Socks</h2>
+            <h3>Price :$ {20}</h3>
+            <button>ADD TO CART</button>
+            <hr/>
+            <h1>1.e</h1>
+            <p>Product Cost $ : {ProductCost}</p>
+            <hr/>
+            <h1>1.f</h1>
+            <h3>Product Cost : {SocksPrice}</h3>
+            <h3>Shipping Cost : {ShippingCost}</h3>
+            <h3>Total Cost : {SocksPrice + ShippingCost}</h3>
+            <button>PLACE YOUR ORDER</button>
+            <hr/>
+            <h1>1.h</h1>
+            <h3>Today is : {date}</h3>
+            <hr/>
+            <h1>1.i</h1>
+            <h3>Current Time : {Current_Time}</h3>
+            <hr/>
+        </div>
+    )
+      const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(div)
+    </script>
+  </body>
+</html
