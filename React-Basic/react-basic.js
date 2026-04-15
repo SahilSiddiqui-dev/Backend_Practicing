@@ -1,0 +1,1 @@
+console.log('This is the the js file loaded into html')
