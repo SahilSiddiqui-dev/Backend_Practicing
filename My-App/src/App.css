@@ -1,0 +1,28 @@
+.light-theme {
+  --bg-color : aliceblue;
+  --text-color: black;
+  --button-bg: black;
+  --button-text : white;
+  --input-bg: white;
+  --input-text: black;
+}
+.dark-theme {
+  --bg-color : #333;
+  --text-color: aliceblue;
+  --button-bg: #f0f0f0;
+  --button-text: #333;
+  --input-bg: #f0f0f0;
+  --input-text: #333;
+}
+main, header, footer{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+input {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+}
