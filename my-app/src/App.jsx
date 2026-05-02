@@ -1,21 +1,43 @@
-import './App.css';
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
-import Registration from './components/Registration.jsx';
-import './components/Header.css';
+import "./App.css"
+import { useState } from "react"
+import Header from "./components/Header"
+import TodoList from "./components/TodoList"
+import Footer from "./components/Footer"
+import {useContext} from "react"
+import ThemeContext, { ThemeProvider } from "./Context/ThemeContext"
+
 function App() {
+  const [inputValue, setInputValue] = useState("");
+  const [todos, setTodos] = useState([]); 
+  const {theme} = useContext(ThemeContext);
+
+  function submitHandling(inputValue) {
+    if(inputValue.trim() === "") {
+      alert("Write something")
+      return;
+    }
+    setTodos([...todos, inputValue])
+    setInputValue("")
+  }
+
+  function deleteTodo(index) {
+    setTodos(todos.filter((_, i) => i !== index));
+  }
 
   return (
-    <>
-
-    <Header title="My First React App"/>
-    
-
+    <div className={theme == "dark"? "dark-theme":"light-theme"}>
    
-    <Registration/>
+    <Header/>
+    <TodoList 
+      inputValue={inputValue} 
+      setInputValue={setInputValue} 
+      submitHandling={submitHandling}  
+      todos={todos}
+      deleteTodo={deleteTodo}
+    />
     <Footer/>
-    
-    </>
+     </div>
+   
   )
 }
 
