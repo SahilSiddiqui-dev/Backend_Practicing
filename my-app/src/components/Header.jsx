@@ -1,15 +1,14 @@
-export default function Header(props){
+import { useContext } from "react"
+import ThemeContext from "../Context/ThemeContext";
+export default function Header() {
+    const {theme, toggleTheme} = useContext(ThemeContext);
     return(
-        <Header>
-        <h1>{props.title}</h1>
-        <h1>{props.color}</h1>
-        <nav className="nav">
-            <a href="#">HOME</a>
-            <a href="#">ABOUT US</a>
-            <a href="#">CONTACT US</a>
-        </nav>
-    
-
-        </Header>
+        <header className= {theme == "dark"? "dark-theme":"light-theme"}> 
+            <h1 >TODO APP</h1>
+            <div>
+                <p>Current Theme: {theme} </p>
+                <button onClick={toggleTheme} className={theme == "dark"? "dark-theme":"light-theme"}> Toggle Theme </button>
+            </div>
+        </header> 
     )
 }
