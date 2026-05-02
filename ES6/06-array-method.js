@@ -13,13 +13,13 @@ const products = [
 console.log("=== MAP: Transform each element ===");
 
 // TASK 1: Get all product names
-const names = products.map(product => ___________);
+const names = products.map(product => product.name );
 console.log("Names:", names);
 // Should be: ["Laptop", "Phone", "Tablet", "Monitor"]
 
 // TASK 2: Get prices with 10% tax
 const pricesWithTax = products.map(product => {
-  return ___________; // Calculate price * 1.1
+  return (product.price * 1.1); // Calculate price * 1.1
 });
 console.log("Prices with 10% tax:", pricesWithTax);
 // Should be: [1320, 880, 550, 330]
@@ -32,12 +32,12 @@ console.log("Formatted:", formatted);
 console.log("\n=== FILTER: Keep only some elements ===");
 
 // TASK 4: Get only in-stock products
-const inStock = products.filter(product => ___________);
+const inStock = products.filter(product => product.inStock);
 console.log("In stock count:", inStock.length);  // Should be 3
 console.log("In stock:", inStock);
 
 // TASK 5: Get products cheaper than $600
-const affordable = products.filter(___________);
+const affordable = products.filter(product => product.price < 600);
 console.log("Affordable products:", affordable);
 // Should include: Phone (800) and Monitor (300)
 
@@ -45,19 +45,19 @@ console.log("\n=== REDUCE: Combine into one value ===");
 
 // TASK 6: Get total price of all products
 const totalPrice = products.reduce((accumulator, product) => {
-  return ___________; // Add product.price to accumulator
+  return  accumulator + product.price; // Add product.price to accumulator
 }, 0);
 console.log("Total price:", totalPrice);  // Should be 2800
 
 // TASK 7: Get total price of only in-stock products
 const totalInStock = products
   .filter(p => p.inStock)
-  .reduce((sum, p) => ___________, 0);
+  .reduce((sum, p) => sum + p.price, 0);
 console.log("Total in-stock price:", totalInStock);  // Should be 2000
 
 // TASK 8: Convert array to object (id -> name mapping)
 const idToName = products.reduce((map, product) => {
-  map[___________] = ___________;  // Fill both blanks
+  map[product.id] = product.name;  // Fill both blanks
   return map;
 }, {});
 console.log("ID to Name mapping:", idToName);
@@ -67,17 +67,17 @@ console.log("\n=== CHALLENGE: Method chaining ===");
 
 // TASK 9: Get total price of all in-stock products with 10% tax applied
 const challengeResult = products
-  .filter(p => ___________)  // Only in-stock
-  .map(p => ___________)     // Add 10% tax to price
-  .reduce((sum, price) => ___________, 0);  // Sum all
+  .filter(p => p.inStock)  // Only in-stock
+  .map(p => p.price * 1.1)     // Add 10% tax to price
+  .reduce((sum, price) => sum + price, 0);  // Sum all
 console.log("Total in-stock with tax:", challengeResult);  // Should be 2200
 
 // TASK 10: Create array of product objects, only in-stock, with formatted price
 const enrichedProducts = products
-  .filter(p => ___________)
+  .filter(p => p.inStock)
   .map(p => ({
     name: p.name,
     priceFormatted: `$${(p.price * 1.1).toFixed(2)}`,
-    // ADD taxAmount field here
+    taxAmount: (p.price * 1.1 - p.price).toFixed(2)
   }));
 console.log("Enriched products:", enrichedProducts);
