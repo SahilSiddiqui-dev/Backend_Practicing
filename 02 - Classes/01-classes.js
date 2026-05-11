@@ -60,7 +60,7 @@ class Animal {
 class Dog extends Animal {
   constructor(name, breed) {
     // super() calls parent constructor FIRST
-    (name);  // Pass name to parent
+    super(name);  // Pass name to parent
     this.breed = breed;
   }
   
@@ -95,7 +95,7 @@ class Mammal extends Animal2 {
 
 class Cat extends Mammal {
   constructor(name, furColor, lives = 9) {
-    ___________(name, furColor);  // Pass to Mammal
+    super(name, furColor);  // Pass to Mammal
     this.lives = lives;
   }
 }
@@ -116,7 +116,7 @@ class BankAccount {
   
   // Getter: called like property (no parentheses)
   get balance() {
-    return ___________; 
+    return this._balance; 
   }
   
   // Setter: called like assignment
@@ -156,12 +156,12 @@ class Vehicle {
 
 class Car extends Vehicle {
   constructor(brand, model, doors) {
-    ___________(brand, model);  // Call parent
+    super(brand, model);  // Call parent
     this.doors = doors;
   }
   
   info() {
-    return `${this.info()} - ${this.doors} doors`;
+    return `${super.info()} - ${this.doors} doors`;
   }
 }
 
@@ -180,7 +180,7 @@ class Student {
   get averageGrade() {
     if (this.grades.length === 0) return 0;
     const sum = this.grades.reduce((a, b) => a + b, 0);
-    return ___________ / this.grades.length;  // Calculate average
+    return sum / this.grades.length;  // Calculate average
   }
   
   addGrade(grade) {
