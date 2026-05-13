@@ -1,3 +1,5 @@
+
+import { useState } from 'react';
 import './App.css'
 
 function App() {
@@ -37,7 +39,11 @@ function App() {
       correctAnswer: 1
     }
   ];
-   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [score, setScore] = useState(0);
+  const [questionAnswered, setQuestionAns] = useState(false);
+  const [valid, setValid] = useState(false);
 
   const handleNext = () => {
     if(currentQuestion < quizData.length - 1){
@@ -50,27 +56,43 @@ function App() {
     setCurrentQuestion(currentQuestion - 1);
   }
 
+  const handleAnswerclick = (index) => {
+    if(questionAnswered) return; // Prevent changing answer after selection
+    if(index === quizData[currentQuestion].correctAnswer){
+      setScore(score + 1);
+      setValid(true);
+    }
+    if(index !== quizData[currentQuestion].correctAnswer){
+      alert("Wrong answer!");
+      return;
+    }
+  }
+
   const question = quizData[currentQuestion]
+
+ 
+  
+
   return (
-    <div className = " container">
-      <h1> Quiz Master </h1>
-      <p className = "question-number">
+    <div className="container">
+      <h1>🎯 Quiz Master</h1>
+      <p className="question-number">
         Question {currentQuestion + 1} of {quizData.length}
       </p>
 
       <h2>{question.question}</h2>
-      <div>
-        {question.options.map((option, index) => {
-          <button key={index} className ="option-btn" >
+      <div className="options">
+        {question.options.map((option, index) => (
+          <button key={index} className="option-btn">
             {option}
           </button>
-        })}
+        ))}
       </div>
-      <div>
-        <button onClick={handlePrevious} disabled= {currentQuestion === 0}>
+      <div className="buttons">
+        <button onClick={handlePrevious} disabled={currentQuestion === 0}>
           ← Previous
         </button> 
-        <button onClick={handlePrevious} disabled = {currentQuestion === quizData.length}>
+        <button onClick={handleNext} disabled={currentQuestion === quizData.length - 1}>
           Next →
         </button>
       </div>      
@@ -78,4 +100,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
