@@ -1,7 +1,12 @@
 import {createStore} from "redux";
 import { todoreducer } from "./reducer";
 
-export const store = createStore(todoreducer);
+export const store = createStore(
+    {
+        reducer:
+        todo: todoreducer;
+    }
+);
 
 
 
