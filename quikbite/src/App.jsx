@@ -1,120 +1,91 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+ const [activeTab, setActiveTab] = useState('menu');
+ const [orders, setOrders] = useState([]);
+
+
+ const foodItems = [
+  { id: 1, name: "Burger", price: 5.99 },
+  { id: 2, name: "Pizza", price: 8.99 },
+  { id: 3, name: "Pasta", price: 7.50 },
+  { id: 4, name: "Chicken Wings", price: 6.99 },
+  { id: 5, name: "Salad", price: 4.50 }
+];
+
+const addToCart = (items) => {
+  const existingOrder = orders.find(order => order.id === items.id);
+  if (existingOrder) {
+    setOrders(orders.map(order => 
+      order.id === items.id ? { ...order, quantity: order.quantity + 1 } : order
+    ));
+  } else {
+    setOrders([...orders, { ...items, quantity: 1 }]);
+  }
+};
+
+const removeFromCart = (id) => {
+  setOrders(orders.filter(order => order.id !== id));
+};
+
+const updateQuantity = (itemsId, newquantity) =>{
+  if(newquantity < 1 || newquantity > 10) return;
+  setOrders(orders.map(order => 
+    order.id === itemsId ? {...order, quantity: newquantity} : order
+  ));
+};
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+      <div className="container">
+        <h1>QuickBite Order Manager</h1>
+        
+        {/* Tab Buttons */}
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+          <button onClick={() => setActiveTab('menu')}>Menu</button>
+          <button onClick={() => setActiveTab('cart')}>Cart ({orders.length})</button>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+        {/* MENU TAB */}
+        {activeTab === 'menu' && (
+          <div>
+            <h2>Menu Items</h2>
+            {foodItems.map(item => (
+              <div key={item.id}>
+                <p>{item.name} - ${item.price}</p>
+                <button onClick={() => addToCart(item)}>Add to Cart</button>
+              </div>
+            ))}
+          </div>
+        )}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+        {/* CART TAB */}
+        {activeTab === 'cart' && (
+          <div>
+            <h2>Your Cart</h2>
+            {orders.length === 0 ? (
+              <p>Cart is empty</p>
+            ) : (
+              <>
+                {orders.map(order => (
+                  <div key={order.id}>
+                    <p>{order.name} - ${order.price}</p>
+                    <p>Quantity: 
+                      <button onClick={() => updateQuantity(order.id, order.quantity - 1)}>-</button>
+                      {order.quantity}
+                      <button onClick={() => updateQuantity(order.id, order.quantity + 1)}>+</button>
+                    </p>
+                    <p>Total: ${(order.price * order.quantity).toFixed(2)}</p>
+                    <button onClick={() => removeFromCart(order.id)}>Remove</button>
+                  </div>
+                ))}
+                <h3>Grand Total: ${orders.reduce((sum, order) => sum + (order.price * order.quantity), 0).toFixed(2)}</h3>
+              </>
+            )}
+          </div>
+        )}
+      </div>
     </>
   )
 }
