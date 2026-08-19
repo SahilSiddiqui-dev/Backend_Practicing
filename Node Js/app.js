@@ -2,18 +2,32 @@ const fs =  require("fs");
 
 console.log("start reading a file ");
 
-fs.readFile("./Node-Js/text.txt", "utf-8", (err, data) => {
+fs.readFile("./text.txt", "utf-8", (err, data) => {
     if(err){
         console.error("There is an error in the file", err);
-        return;
+    }
+    else {
+        console.log("File content : ", data);
     }
 
-        console.log("File Content : ", data);
 } )
+fs.writeFile("./text.txt", "This is a new file created using writeFile method", (err) => {
+    if(err){
+        console.error("there is an error in the file", err);
+    }
+    else {
+        console.log("File created successfully");
+    }
+})
+// fs.appendFile("./text.txt", "This is a new line added to the file", (err) => {
+//     if(err){
+//         console.error("There is an error in the file", err);
+//         return;
+//     }
+//     console.log("File appended successfully");
+// });
 
-//fs.writeFile("text.txt", "Start Grinding");
-
-fs.readFile("./Node-Js/text.txt", "utf-8", (err, data) => {
+fs.readFile("./text.txt", "utf-8", (err, data) => {
     if(err) {
         console.error("cant read file !!", err);
         return;
@@ -23,7 +37,14 @@ fs.readFile("./Node-Js/text.txt", "utf-8", (err, data) => {
 
 console.log("File execution is over");
 
-
+// fs.rename("test.txt", "demo.txt", function(err) {
+//     if(err){
+//         console.error(err);
+//     }
+//     else {
+//         console.log("done");
+//     }
+// })
 // Using Async-await
 
 // async function reading() {
