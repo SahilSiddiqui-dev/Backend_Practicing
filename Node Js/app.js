@@ -1,61 +1,63 @@
-const fs =  require("fs");
+const express = require("express");
+const app = express();
+const port = 3000;
 
-console.log("start reading a file ");
+const users = [
+    {   id : 0,
+        name: "Sahil",
+        age: 22,
+        skill: "backend"
+    },
+    {   
+        id : 1,
+        name : "John",
+        age : 25,
+        skill : "frontend"
+    }
+   ]
 
-fs.readFile("./text.txt", "utf-8", (err, data) => {
-    if(err){
-        console.error("There is an error in the file", err);
-    }
-    else {
-        console.log("File content : ", data);
-    }
+function getUserById(id) {
+ const user = users.find((u) => u.id == id);
+     return user ? user : null;
+}
 
-} )
-fs.writeFile("./text.txt", "This is a new file created using writeFile method", (err) => {
-    if(err){
-        console.error("there is an error in the file", err);
-    }
-    else {
-        console.log("File created successfully");
-    }
-})
-// fs.appendFile("./text.txt", "This is a new line added to the file", (err) => {
-//     if(err){
-//         console.error("There is an error in the file", err);
-//         return;
-//     }
-//     console.log("File appended successfully");
-// });
+app.get("/", (req, res) => {
+    res.send("Hello from our Node.js backend server!");
+})  
 
-fs.readFile("./text.txt", "utf-8", (err, data) => {
-    if(err) {
-        console.error("cant read file !!", err);
-        return;
-    }
-    console.log("file content : ", data);
+app.get("/about", (req, res) => {
+    res.json(users);
 })
 
-console.log("File execution is over");
+app.get("/api/users/:id/name", (req, res) => {
+    const userId = parseInt(req.params.id);
+    const userName = getUserById(userId);
 
-// fs.rename("test.txt", "demo.txt", function(err) {
-//     if(err){
-//         console.error(err);
-//     }
-//     else {
-//         console.log("done");
-//     }
-// })
-// Using Async-await
+    if(userName){
+        res.json({name : userName.name});
+    }
+    else {
+        res.status(404).send({ message: "User not found" });
+    }
+})
 
-// async function reading() {
-//     try {
-//         const data = await fs.readFile("text.txt", "utf8");
-//         console.log("FileData : ", data);
-//     }
-//     catch(err) {
-//         console.error("File cant be read !!", err);
-//     }
-// }
-// reading();
+app.get("/api/users/:id/skill", (req, res) => {
+    const userId = parseInt(req.params.id);
+    const userSkill = getUserById(userId);
 
+    if(userSkill) {
+        res.send({Skill : userSkill.skill});
+    }
+    else {
+        res.status(404).json({message : "User not found" });
+    }
+    
+})
 
+app.use((req, res) => {
+    res.status(404).send({ message: "Requested page is not found on the server" });
+})
+
+app.listen(port, () => {
+    console.log("Server running at http://localhost:3000/");
+})
