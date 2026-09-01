@@ -49,7 +49,7 @@ app.get("/api/users/:id/skill", (req, res) => {
         res.send({Skill : userSkill.skill});
     }
     else {
-        res.status(404).json({message : "User not found" });
+        res.status(404).send({message : "User not found" });
     }
     
 })
