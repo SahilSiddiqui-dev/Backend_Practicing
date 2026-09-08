@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const teachers = [
+const checkRole = require('./role_middleware');
+let teachers = [
     {
         id: 1,
         name: "John",
@@ -27,14 +28,26 @@ router.use(express.json());
 
 router.get("/", (req, res) => {
     if(teachers){
-        res.status(200).json(teachers);
+        return res.status(200).json(teachers);
     }
 })
 
-router.post("/", (req, res) => {
+router.delete("/:id", checkRole("admin"), (req, res) => {
+   const userId = parseInt(req.params.id);
+   const len = teachers.length;
+   teachers = teachers.filter(s => s.id !== userId);
+   if(len > teachers.length){
+    return res.status(200).json({message : "Deleted Teacher Successfully"});
+   }
+   else {
+    return res.status(404).json({message : "Teacher was not found"});
+   }
+});
+
+router.post("/", checkRole("admin"), (req, res) => {
     const name = req.body.name;
     const subject = req.body.subject;
-    if(!name || !subject) return res.status(404).json({message : "Name was not found"});
+    if(!name || !subject) return res.status(400).json({message : "Name was not found"});
 
     const newTeacher = {
         id : teachers.length > 0 ? Math.max(...teachers.map(s => s.id)) + 1 : 1,
@@ -43,7 +56,7 @@ router.post("/", (req, res) => {
     }
     teachers.push(newTeacher);
 
-    res.status(200).json({
+    res.status(201).json({
         message : "Successfully Added New Teacher",
         Teacher : newTeacher
     })
