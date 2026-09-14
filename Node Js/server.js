@@ -1,5 +1,7 @@
+require('dotenv').config();
 const express = require('express');
-const studentRoutes = require('./post.js');
+const mongoose = require('mongoose');
+const studentRoutes = require('./students.js');
 const teacherRoutes = require('./teacher.js');
 const checkRole = require('./role_middleware');
 const app = express();
@@ -10,6 +12,15 @@ app.use((req, res, next) => {
   console.log("Request coming from ", req.originalUrl);
   console.log("Request method is ", req.method);
   next();
+});
+
+
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => {
+  console.log("Connected to MongoDB");
+})
+.catch((err) => {
+  console.error("Error connecting to mongodb", err);
 });
 
 app.use(express.json());
